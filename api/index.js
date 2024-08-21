@@ -32,10 +32,18 @@ const app = express();
 app.use('/uploads',express.static(__dirname + '/uploads'))
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({
-    credentials: true,
-    origin: process.env.CLIENT_URL,
-}))
+// app.use(cors({
+//     credentials: true,
+//     origin: process.env.CLIENT_URL,
+// }))
+app.use (
+    cors ({
+      origin: 'https://mern-live-chat-seven.vercel.app/',
+      credentials: true,
+      methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+      allowedHeaders: 'Authorization, token, X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version',
+    })
+  );
 
 async function getUserDataFromRequest(req) {
     return new Promise((resolve, reject) =>{
